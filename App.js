@@ -1,21 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import ListProduct from './product/ListProduct'
+import AddProduct from './product/AddProduct'
+import EditProduct from './product/EditProduct'
+import SearchProduct from './product/SearchProduct'
+import DeleteProduct from './product/DeleteProduct'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Tab = createBottomTabNavigator()
+
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Tab.Navigator 
+            tabBarOptions={{
+            activeTintColor: 'blue',
+            inactiveTintColor: 'gray',
+            labelStyle: {
+              fontSize: 20
+            }
+          }}>
+            <Tab.Screen
+              name='List'
+              component={ ListProduct }
+            />
+            <Tab.Screen
+              name='Edit'
+              component={ EditProduct }
+            />
+            <Tab.Screen
+              name='Add'
+              component={ AddProduct }
+            />
+            <Tab.Screen
+              name='Search'
+              component={ SearchProduct }
+            />
+            <Tab.Screen
+              name='Delete'
+              component={ DeleteProduct }
+            />
+        </Tab.Navigator>
+      </NavigationContainer>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
